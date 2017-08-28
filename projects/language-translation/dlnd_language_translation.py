@@ -526,10 +526,10 @@ tests.test_seq2seq_model(seq2seq_model)
 # - Set `keep_probability` to the Dropout keep probability
 # - Set `display_step` to state how many steps between each debug output statement
 
-# In[35]:
+# In[57]:
 
 # Number of Epochs
-epochs = 3
+epochs = 5
 # Batch Size
 batch_size = 128
 # RNN Size
@@ -537,8 +537,8 @@ rnn_size = 256
 # Number of Layers
 num_layers = 2
 # Embedding Size
-encoding_embedding_size = 32 
-decoding_embedding_size = 32   
+encoding_embedding_size = 256 
+decoding_embedding_size = 256  
 # Learning Rate
 learning_rate = 0.005
 # Dropout Keep Probability
@@ -549,7 +549,7 @@ display_step = 100
 # ### Build the Graph
 # Build the graph using the neural network you implemented.
 
-# In[36]:
+# In[58]:
 
 """
 DON'T MODIFY ANYTHING IN THIS CELL
@@ -604,7 +604,7 @@ with train_graph.as_default():
 
 # Batch and pad the source and target sequences
 
-# In[37]:
+# In[59]:
 
 """
 DON'T MODIFY ANYTHING IN THIS CELL
@@ -643,7 +643,7 @@ def get_batches(sources, targets, batch_size, source_pad_int, target_pad_int):
 # ### Train
 # Train the neural network on the preprocessed data. If you have a hard time getting a good loss, check the forms to see if anyone is having the same problem.
 
-# In[38]:
+# In[60]:
 
 """
 DON'T MODIFY ANYTHING IN THIS CELL
@@ -729,7 +729,7 @@ with tf.Session(graph=train_graph) as sess:
 # ### Save Parameters
 # Save the `batch_size` and `save_path` parameters for inference.
 
-# In[41]:
+# In[61]:
 
 """
 DON'T MODIFY ANYTHING IN THIS CELL
@@ -740,7 +740,7 @@ helper.save_params(save_path)
 
 # # Checkpoint
 
-# In[42]:
+# In[62]:
 
 """
 DON'T MODIFY ANYTHING IN THIS CELL
@@ -761,7 +761,7 @@ load_path = helper.load_params()
 # - Convert words into ids using `vocab_to_int`
 #  - Convert words not in the vocabulary, to the `<UNK>` word id.
 
-# In[49]:
+# In[63]:
 
 def sentence_to_seq(sentence, vocab_to_int):
     """
@@ -771,7 +771,7 @@ def sentence_to_seq(sentence, vocab_to_int):
     :return: List of word ids
     """
     # TODO: Implement Function
-    return [vocab_to_int.get(w, vocab_to_int['<UNK>']) for w in sentence.split()]
+    return [vocab_to_int.get(w, vocab_to_int['<UNK>']) for w in sentence.lower().split()]
 
 
 """
@@ -783,7 +783,7 @@ tests.test_sentence_to_seq(sentence_to_seq)
 # ## Translate
 # This will translate `translate_sentence` from English to French.
 
-# In[50]:
+# In[64]:
 
 translate_sentence = 'he saw a old yellow truck .'
 
